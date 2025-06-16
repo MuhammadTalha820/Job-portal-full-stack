@@ -26,7 +26,7 @@ const HeroSection = () => {
                         type="text"
                         placeholder='Find your dream jobs'
                         onChange={(e) => setQuery(e.target.value)}
-                        className='outline-none border-none w-full'
+                        className='outline-none border-none w-full p-2 m-3 rounded-full'
 
                     />
                     <Button onClick={searchJobHandler} className="rounded-r-full bg-[#6A38C2]">

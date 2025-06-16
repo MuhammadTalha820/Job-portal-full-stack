@@ -82,12 +82,12 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     }
 
     return (
-        <Dialog open={open} onInteractOutside={() => setOpen(false)}>
-            <DialogContent className="sm:max-w-[425px]">
+        <Dialog open={open} onInteractOutside={() => setOpen(false)} >
+            <DialogContent className="sm:max-w-[425px] bg-sky-100 z-50">
                 <DialogHeader>
                     <DialogTitle>Update Profile</DialogTitle>
                 </DialogHeader>
-                <form onSubmit={submitHandler}>
+                <form onSubmit={submitHandler} >
                     <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
                             <Label htmlFor="fullname" className="text-right">

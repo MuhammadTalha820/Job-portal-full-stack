@@ -53,7 +53,7 @@ export const register = async (req, res) => {
             password: hashed,
             role,
             profile: {
-                profilePhoto: profilePhotoUrl,
+                profilePhoto: profilePhotoUrl || undefined,
                 resume: resumeUrl,
                 resumeOriginalName: file?.originalname,
                 resumeText,

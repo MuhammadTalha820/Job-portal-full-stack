@@ -22,6 +22,7 @@ import { setOnlineUser } from './redux/authSlice'
 import { setSocket } from './redux/socketSlice'
 import QuizPage from './components/QuizPage'
 import ErrorBoundary from './components/ErrorBoundary'
+import "../src/index.css"
 
 
 const appRouter = createBrowserRouter([

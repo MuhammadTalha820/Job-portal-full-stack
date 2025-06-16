@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
         company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
         profilePhoto: {
             type: String,
-            default: ""
+            default: "https://wallpapers.com/images/hd/cool-neon-blue-profile-picture-u9y9ydo971k9mdcf.jpg"
         }
     },
 }, { timestamps: true });

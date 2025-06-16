@@ -1,16 +1,20 @@
-// src/redux/messagesSlice.js
+// src/redux/socketSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const socketSlice = createSlice({
     name: "socket",
     initialState: {
-        socket: null
+        instance: null,    // ← call this “instance” (not “socket” or “list”)
     },
     reducers: {
         setSocket: (state, action) => {
-            state.list = action.payload;
-        }
-    }
+            state.instance = action.payload;
+        },
+        clearSocket: (state) => {
+            state.instance = null;
+        },
+    },
 });
-export const { setSocket } = socketSlice.actions // ✅ Correct
-export default socketSlice.reducer
+
+export const { setSocket, clearSocket } = socketSlice.actions;
+export default socketSlice.reducer;
