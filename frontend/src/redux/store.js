@@ -17,6 +17,7 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
+import requestReducer from "./requestSlice";
 import storage from 'redux-persist/lib/storage';
 
 // 1) Which slices to persist (we explicitly skip auth, messages, socket)
@@ -24,7 +25,8 @@ const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    blacklist: ['auth', 'messages', 'socket'],
+    // blacklist: ['messages', 'socket'],
+    blacklist: [''],
 };
 
 const rootReducer = combineReducers({
@@ -34,6 +36,7 @@ const rootReducer = combineReducers({
     application: applicationSlice,
     messages: messagesSlice,
     socket: socketSlice,
+    requests: requestReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -23,6 +23,8 @@ import { setSocket } from './redux/socketSlice'
 import QuizPage from './components/QuizPage'
 import ErrorBoundary from './components/ErrorBoundary'
 import "../src/index.css"
+import Friends from './components/Friends'
+import Notifications from './components/Notifications'
 
 
 const appRouter = createBrowserRouter([
@@ -54,6 +56,11 @@ const appRouter = createBrowserRouter([
     path: "/profile",
     element: <Profile />
   },
+
+  {
+    path: "/notifications",
+    element: <Notifications />
+  },
   // admin ke liye yha se start hoga
   {
     path: "/admin/companies",
@@ -80,11 +87,19 @@ const appRouter = createBrowserRouter([
     element: <ProtectedRoute><Applicants /></ProtectedRoute>
   },
 
+
+
   //chatting k lea yahn sy start hu ga
 
   {
     path: "/chatting",
     element: <ChattingSetup />
+  },
+
+  {
+    path: "/friends",
+    element: <Friends />
+
   },
   {
     path: "/quiz",
@@ -115,7 +130,13 @@ function App() {
     };
   }, [user, dispatch]);
 
-  return <RouterProvider router={appRouter} />;
+  return (
+    // <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-teal-700 text-white">
+    <RouterProvider router={appRouter} />
+    // </div>
+
+
+  );
 }
 
 export default App;
