@@ -15,7 +15,7 @@ const ChatHeader = () => {
   }
 
   return (
-    <div className="p-4 border-b border-gray-700 bg-white/50 rounded-t-lg flex items-center gap-4">
+    <div className="p-4 border-b border-gray-700 bg-white/50 rounded-t-lg flex items-center gap-5">
       <img
         src={selectedUser.profile?.profilePhoto || '/default-profile.png'}
         alt="User"
