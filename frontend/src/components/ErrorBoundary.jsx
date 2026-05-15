@@ -12,8 +12,8 @@ export default class ErrorBoundary extends React.Component {
     render() {
         if (this.state.hasError) {
             return (
-                <div className="p-6 text-center">
-                    <h2 className="text-xl font-semibold mb-2">
+                <div className="p-6 text-center ">
+                    <h2 className="text-xl  font-semibold mb-2">
                         Oops—something went wrong.
                     </h2>
                     <p>Please refresh or try again later.</p>
