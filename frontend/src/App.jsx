@@ -131,7 +131,7 @@ function App() {
   }, [user, dispatch]);
 
   return (
-    // <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-teal-700 text-white">
+    // <div className="min-h-screen bg-gradient-to-br from-black via-gray-900  to-teal-700 text-white">
     <RouterProvider router={appRouter} />
     // </div>
 
