@@ -1,5 +1,6 @@
 import express from 'express'
 import isAuthenticated from '../middlewares/isAuthenticated.js'
+
 import { singleUpload } from '../middlewares/mutler.js'
 import {
     register,
