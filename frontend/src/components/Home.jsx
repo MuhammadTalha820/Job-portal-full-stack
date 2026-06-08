@@ -30,12 +30,11 @@ const Home = () => {
     <div>
       <Navbar />
 
-      <main className="max-w-7xl mx-auto px-4 top-10">
+      <main className="max-w-7xl mx-auto px-4 top-10 ">
         <HeroSection />
 
         <CategoryCarousel />
 
-        {/* Show the “Show Relevant Jobs” button & list if resumeText exists */}
         {user?.profile?.skills?.length > 0 && (
           <section className="my-10">
             <h2 className="text-xl font-semibold mb-4">
