@@ -43,11 +43,11 @@ export default function RelevantJobs() {
                 </p>
             )}
 
-            <div className="mt-6 grid grid-cols-3 gap-4">
+            <div className="mt-6 grid grid-cols-3 gap-4 ">
                 {loading ? (
                     <span>Loading matches…</span>
                 ) : matchingJobs.length === 0 ? (
-                    <span className="text-gray-700">No matching jobs found</span>
+                    <span className="text-gray-700"> No matching jobs found</span>
                 ) : (
                     matchingJobs.map((job) => (
                         <LatestJobCards key={job._id} job={job} />
