@@ -51,11 +51,11 @@ const Notifications = () => {
                 <h1 className="text-3xl font-bold mb-6">Notifications</h1>
 
                 {incoming.length === 0 ? (
-                    <p className="text-gray-500">No new requests.</p>
+                    <p className="text-gray-500"> No new requests.</p>
                 ) : incoming.map(req => (
                     <div
                         key={req._id}
-                        className="flex items-center justify-between p-4 mb-2 bg-white rounded shadow"
+                        className="flex items-center justify-between p-4 mb-2  bg-white rounded shadow"
                     >
                         {/* Directly print the populated fullname */}
                         <p className="font-medium">
