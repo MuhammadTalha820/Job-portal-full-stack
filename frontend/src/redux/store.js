@@ -20,13 +20,11 @@ import {
 import requestReducer from "./requestSlice";
 import storage from 'redux-persist/lib/storage';
 
-// 1) Which slices to persist (we explicitly skip auth, messages, socket)
 const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    // blacklist: ['messages', 'socket'],
-    blacklist: [''],
+    blacklist: ['messages', 'socket'],
 };
 
 const rootReducer = combineReducers({
@@ -45,11 +43,8 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
-            // 2) Bypass serializability warnings for Redux‑Persist actions...
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            // 3) …and also ignore just the one non‑serializable field in our socket slice:
             serializableCheck: {
-                ignoredPaths: ['socket.instance'],
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         }),
 });

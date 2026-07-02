@@ -4,6 +4,7 @@ import {
     DialogContent,
     DialogFooter,
     DialogHeader,
+    DialogDescription,
     DialogTitle,
 } from './ui/dialog'
 import { Label } from './ui/label'
@@ -86,6 +87,9 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
             <DialogContent className="sm:max-w-[425px] bg-sky-100 z-50">
                 <DialogHeader>
                     <DialogTitle>Update Profile</DialogTitle>
+                    <DialogDescription className="sr-only">
+                        Update your profile information, skills, and resume.
+                    </DialogDescription>
                 </DialogHeader>
                 <form onSubmit={submitHandler} >
                     <div className="grid gap-4 py-4">
@@ -190,3 +194,6 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
 }
 
 export default UpdateProfileDialog
+
+
+

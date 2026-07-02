@@ -15,16 +15,15 @@ import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import ChattingSetup from './components/chatting/ChattingSetup'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { io } from 'socket.io-client'
 import { setOnlineUser } from './redux/authSlice'
-import { setSocket } from './redux/socketSlice'
 import QuizPage from './components/QuizPage'
 import ErrorBoundary from './components/ErrorBoundary'
 import "../src/index.css"
 import Friends from './components/Friends'
 import Notifications from './components/Notifications'
+import { connectSocket, disconnectSocket } from './utils/socket'
 
 
 const appRouter = createBrowserRouter([
@@ -118,17 +117,23 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let sock;
-    if (user) {
-      sock = io('http://localhost:8000', { query: { userId: user._id } });
-      dispatch(setSocket(sock));
-      sock.on('getOnlineUsers', users => dispatch(setOnlineUser(users)));
+    if (!user?._id) {
+      disconnectSocket();
+      dispatch(setOnlineUser([]));
+      return;
     }
+
+    const socket = connectSocket(user._id);
+    const handleOnlineUsers = (users) => dispatch(setOnlineUser(users));
+
+    socket.on('getOnlineUsers', handleOnlineUsers);
+
     return () => {
-      if (sock) sock.disconnect();
-      dispatch(setSocket(null));
+      socket.off('getOnlineUsers', handleOnlineUsers);
+      disconnectSocket();
+      dispatch(setOnlineUser([]));
     };
-  }, [user, dispatch]);
+  }, [user?._id, dispatch]);
 
   return (
     // <div className="min-h-screen bg-gradient-to-br from-black via-gray-900  to-teal-700 text-white">
@@ -140,3 +145,5 @@ function App() {
 }
 
 export default App;
+
+
