@@ -22,9 +22,9 @@ const Browse = () => {
     return (
         <div>
             <Navbar />
-            <div className='max-w-7xl mx-auto my-10'>
-                <h1 className='font-bold text-xl my-10'>Search Results ({allJobs.length})</h1>
-                <div className='md:grid md:grid-cols-3 gap-4 sm:grid sm:grid-cols-1 sm:mx-auto'>
+            <div className='max-w-7xl mx-auto my-10 '>
+                <h1 className='font-bold text-xl my-10 '>Search Results ({allJobs.length})</h1>
+                <div className='md:grid  md:grid-cols-3 gap-4 sm:grid sm:grid-cols-1 sm:mx-auto'>
                     {
                         allJobs.length === 0 ? (
                             <span>No Jobs Found</span>
