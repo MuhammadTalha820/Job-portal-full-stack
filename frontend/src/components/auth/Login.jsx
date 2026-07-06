@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading, setUser } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
+import { setAuthToken } from '@/utils/axiosAuth'
 
 const Login = () => {
     const [input, setInput] = useState({
@@ -37,6 +38,7 @@ const Login = () => {
                 withCredentials: true,
             });
             if (res.data.success) {
+                setAuthToken(res.data.token);
                 dispatch(setUser(res.data.user));
                 navigate("/");
                 toast.success(res.data.message);
@@ -117,3 +119,4 @@ const Login = () => {
 }
 
 export default Login
+

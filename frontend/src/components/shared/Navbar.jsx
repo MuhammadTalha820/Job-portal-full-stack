@@ -9,6 +9,7 @@ import axios from 'axios'
 import { USER_API_END_POINT } from '@/utils/constant'
 import { setUser } from '@/redux/authSlice'
 import { toast } from 'sonner'
+import { setAuthToken } from '@/utils/axiosAuth'
 
 const Navbar = () => {
     const { user } = useSelector(store => store.auth)
@@ -21,6 +22,7 @@ const Navbar = () => {
         try {
             const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true })
             if (res.data.success) {
+                setAuthToken(null)
                 dispatch(setUser(null))
                 navigate('/')
                 toast.success(res.data.message)
@@ -245,3 +247,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+

@@ -3,6 +3,22 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import getDataUri from '../utils/datauri.js'
 import cloudinary from '../utils/cloudinary.js'
+
+const isSecureRequest = (req) => (
+    process.env.NODE_ENV === 'production' ||
+    process.env.VERCEL === '1' ||
+    req.headers['x-forwarded-proto'] === 'https'
+);
+
+const getCookieOptions = (req, maxAge) => {
+    const secure = isSecureRequest(req);
+    return {
+        maxAge,
+        httpOnly: true,
+        sameSite: secure ? 'none' : 'lax',
+        secure,
+    };
+};
 export const register = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, password, role } = req.body;
@@ -93,14 +109,9 @@ export const login = async (req, res) => {
         }
 
         return res
-             .cookie('token', token, {
-                maxAge: 86400000,
-                httpOnly: true,
-                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-                secure: process.env.NODE_ENV === 'production'
-            })
+             .cookie('token', token, getCookieOptions(req, 86400000))
             .status(200)
-            .json({ message: `Welcome back ${user.fullname}`, user: safeUser, success: true })
+            .json({ message: `Welcome back ${user.fullname}`, token, user: safeUser, success: true })
     } catch (err) {
         console.error('Login error:', err)
         return res.status(500).json({ message: 'Server error', success: false })
@@ -108,12 +119,7 @@ export const login = async (req, res) => {
 }
 
 export const logout = (req, res) =>
-      res.cookie('token', '', {
-        maxAge: 0,
-        httpOnly: true,
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        secure: process.env.NODE_ENV === 'production'
-    }).status(200).json({ message: 'Logged out successfully.', success: true })
+      res.cookie('token', '', getCookieOptions(req, 0)).status(200).json({ message: 'Logged out successfully.', success: true })
 
 
 
@@ -199,3 +205,6 @@ export const getOtherUser = async (req, res) => {
         return res.status(500).json({ message: 'Server error', success: false })
     }
 }
+
+
+
