@@ -2,6 +2,10 @@ import axios from 'axios';
 
 export const AUTH_TOKEN_KEY = 'jobwiz_auth_token';
 
+let interceptorRegistered = false;
+
+export const getAuthToken = () => localStorage.getItem(AUTH_TOKEN_KEY);
+
 export const setAuthToken = (token) => {
     if (token) {
         localStorage.setItem(AUTH_TOKEN_KEY, token);
@@ -13,8 +17,24 @@ export const setAuthToken = (token) => {
     delete axios.defaults.headers.common.Authorization;
 };
 
+export const setupAxiosAuth = () => {
+    if (interceptorRegistered) return;
+
+    axios.interceptors.request.use((config) => {
+        const token = getAuthToken();
+        if (token) {
+            config.headers = config.headers || {};
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    });
+
+    interceptorRegistered = true;
+};
+
 export const loadAuthToken = () => {
-    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+    setupAxiosAuth();
+    const token = getAuthToken();
     if (token) {
         axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     }

@@ -16,6 +16,7 @@ import axios from 'axios'
 import { USER_API_END_POINT } from '@/utils/constant'
 import { setUser } from '@/redux/authSlice'
 import { toast } from 'sonner'
+import { getAuthToken } from '@/utils/axiosAuth'
 
 const UpdateProfileDialog = ({ open, setOpen }) => {
     const [loading, setLoading] = useState(false)
@@ -60,6 +61,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data',
+                        Authorization: `Bearer ${getAuthToken()}`,
                     },
                     withCredentials: true,
                 }
@@ -194,6 +196,8 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
 }
 
 export default UpdateProfileDialog
+
+
 
 
 
