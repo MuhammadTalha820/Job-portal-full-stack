@@ -10,13 +10,14 @@ import {
 } from '@/redux/requestSlice';
 import { Button } from './ui/button';
 import Navbar from './shared/Navbar';
+import { FRIENDS_API_END_POINT } from '@/utils/constant';
 
 const Notifications = () => {
     const dispatch = useDispatch();
     const incoming = useSelector(state => state.requests.receivedRequests);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/v1/friends/incoming', { withCredentials: true })
+        axios.get(`${FRIENDS_API_END_POINT}/incoming`, { withCredentials: true })
             .then(({ data }) => {
                 // data is populated with requester.fullname
                 dispatch(setReceivedRequests(data));
@@ -26,7 +27,7 @@ const Notifications = () => {
 
     const handleResponse = (requestId, requesterId, action) => {
         axios.patch(
-            `http://localhost:8000/api/v1/friends/respond/${requestId}`,
+            `${FRIENDS_API_END_POINT}/respond/${requestId}`,
             { action },
             { withCredentials: true }
         )

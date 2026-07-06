@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMessages } from '@/redux/messagesSlice';
+import { MESSAGE_API_END_POINT } from '@/utils/constant';
 
 const useGetMessages = () => {
     const dispatch = useDispatch();
@@ -14,11 +15,11 @@ const useGetMessages = () => {
                 axios.defaults.withCredentials = true;
                 // fetch messages where current user is receiver
                 const res1 = await axios.get(
-                    `http://localhost:8000/api/v1/message/${user._id}`
+                    `${MESSAGE_API_END_POINT}/${user._id}`
                 );
                 // fetch messages where current user is sender
                 const res2 = await axios.get(
-                    `http://localhost:8000/api/v1/message/${selectedUser._id}`
+                    `${MESSAGE_API_END_POINT}/${selectedUser._id}`
                 );
                 // combine both and filter only those between these two
                 const all = [...res1.data.messages, ...res2.data.messages]

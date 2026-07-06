@@ -10,6 +10,7 @@ import {
 } from '@/redux/requestSlice';
 import { Button } from './ui/button';
 import Navbar from './shared/Navbar';
+import { FRIENDS_API_END_POINT } from '@/utils/constant';
 
 const Friends = () => {
     const dispatch = useDispatch();
@@ -27,14 +28,14 @@ const Friends = () => {
 
     useEffect(() => {
         // load outgoing (pending) requests
-        axios.get('http://localhost:8000/api/v1/friends/outgoing', { withCredentials: true })
+        axios.get(`${FRIENDS_API_END_POINT}/outgoing`, { withCredentials: true })
             .then(({ data }) => {
                 dispatch(setSentRequests(data)); // data is array of { _id, receiver: {...} }
             })
             .catch(() => toast.error('Failed to load sent requests'));
 
         // load confirmed friends
-        axios.get('http://localhost:8000/api/v1/friends/friends', { withCredentials: true })
+        axios.get(`${FRIENDS_API_END_POINT}/friends`, { withCredentials: true })
             .then(({ data }) => {
                 dispatch(setFriends(data.friends)); // data.friends is array of user IDs
             })
@@ -42,7 +43,7 @@ const Friends = () => {
     }, [dispatch]);
 
     const handleSend = userId => {
-        axios.post(`http://localhost:8000/api/v1/friends/send/${userId}`, {}, { withCredentials: true })
+        axios.post(`${FRIENDS_API_END_POINT}/send/${userId}`, {}, { withCredentials: true })
             .then(({ data }) => {
                 dispatch(sendRequest(data.fr)); // data.fr is the new FriendRequest object
                 toast.success(data.message);

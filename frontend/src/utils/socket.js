@@ -1,11 +1,12 @@
 // utils/socket.js
 import { io } from 'socket.io-client';
+import { SOCKET_URL } from './constant';
 
 let socket;
 
 export const connectSocket = (userId) => {
     if (!socket) {
-        socket = io('http://localhost:8000', {
+        socket = io(SOCKET_URL, {
             query: { userId },
             withCredentials: true,
         });

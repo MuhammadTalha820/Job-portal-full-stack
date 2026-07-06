@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "./ui/button";
+import { QUIZ_API_END_POINT } from "@/utils/constant";
 
 export default function QuizPage() {
     const [questions, setQuestions] = useState([]);   // default to empty array
@@ -12,7 +13,7 @@ export default function QuizPage() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8000/api/quiz/generate", { withCredentials: true })
+            .get(`${QUIZ_API_END_POINT}/generate`, { withCredentials: true })
             .then(res => {
                 const q = res.data.questions;
                 if (!Array.isArray(q)) {
@@ -39,7 +40,7 @@ export default function QuizPage() {
         setScore(correct);
     };
 
-    if (loading) return <p>Loading quiz…</p>;
+    if (loading) return <p>Loading quiz...</p>;
     if (error) return <p className="text-red-500">{error}</p>;
 
     // safeQuestions will always be an array

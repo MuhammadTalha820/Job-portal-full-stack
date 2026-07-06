@@ -3,6 +3,7 @@ import { IoSend } from "react-icons/io5";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addMessage } from '@/redux/messagesSlice';
+import { MESSAGE_API_END_POINT } from '@/utils/constant';
 
 const SendInput = () => {
     const [message, setMessage] = useState("");
@@ -16,7 +17,7 @@ const SendInput = () => {
 
         try {
             const res = await axios.post(
-                `http://localhost:8000/api/v1/message/send/${selectedUser?._id}`,
+                `${MESSAGE_API_END_POINT}/send/${selectedUser?._id}`,
                 { message },
                 { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
             );
