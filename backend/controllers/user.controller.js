@@ -93,7 +93,12 @@ export const login = async (req, res) => {
         }
 
         return res
-            .cookie('token', token, { maxAge: 86400000, httpOnly: Secure, sameSite: None })
+             .cookie('token', token, {
+                maxAge: 86400000,
+                httpOnly: true,
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+                secure: process.env.NODE_ENV === 'production'
+            })
             .status(200)
             .json({ message: `Welcome back ${user.fullname}`, user: safeUser, success: true })
     } catch (err) {
@@ -103,7 +108,12 @@ export const login = async (req, res) => {
 }
 
 export const logout = (req, res) =>
-    res.cookie('token', '', { maxAge: 0 }).status(200).json({ message: 'Logged out successfully.', success: true })
+      res.cookie('token', '', {
+        maxAge: 0,
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production'
+    }).status(200).json({ message: 'Logged out successfully.', success: true })
 
 
 
