@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const jobSlice = createSlice({
     name: "job",
     initialState: {
@@ -10,6 +11,7 @@ const jobSlice = createSlice({
         allAppliedJobs: [],
         searchedQuery: "",
     },
+    
     reducers: {
         // actions
         setAllJobs: (state, action) => {
@@ -32,6 +34,8 @@ const jobSlice = createSlice({
         }
     }
 });
+
+
 export const {
     setAllJobs,
     setSingleJob,
