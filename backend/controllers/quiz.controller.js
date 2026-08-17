@@ -33,6 +33,7 @@ function generateOptions(correctSkill, allSkills) {
 }
 
 // ===== Gemini 2.0 Flash API Config =====
+
 const GEMINI_API_KEY = process.env.GOOGLE_API_KEY;
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
@@ -51,6 +52,8 @@ export const generateQuiz = async (req, res) => {
             });
         }
 
+
+        
         // 3. Prepare Prompt (explicitly ask for pure JSON)
         const prompt = `
             Generate 10 technical multiple-choice questions about: ${skills.join(", ")}.
